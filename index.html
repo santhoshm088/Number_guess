@@ -1,0 +1,138 @@
+<html>
+    <head>
+        <title>Guessing Game</title>
+    </head>
+    <body style="background-color: rgb(153, 201, 207);">
+        <h1 style="text-align: center;margin-top: 100px;">Number Guessing Game</h1>
+        <div style="text-align: center;">
+        <p style="font-size: 20px; color: #4F709C;">We have selected a random number between 1 and 100. See if you can guess it in 10 turns or fewer. we'll tell you if your guess is low or high</p>
+        </div>
+        <div style="text-align: center;">
+        <label style="font-size: larger;">Enter guess number : </label> <input type="text" placeholder="Enter a number" id="number" style="border-radius: 5px; height: 25px; border: 2px solid brown; width: 150px; font-size: larger;"><br><br>
+        <div style="display: flex;justify-content: center;">
+        <button onclick="check()" style="margin-right: 50px;height: 30px;font-size: larger;border-radius: 3px;background-color: #9FBB73;" class="submit" id="submit">Submit</button>
+        <button onclick="restart()" style="height: 30px;font-size: larger;border-radius: 3px;background-color: #4F709C;">Restart</button>
+       </div>
+    </div>
+        <div style="display: none;justify-content: center;" id="previous">
+        <div style="display: flex;">
+            <p style="font-size: x-large;">Previous guess: </p> <p style="font-size: x-large;" id="guesses"></p>
+        </div>
+        </div>
+        <div style="display:none; height: 30px;padding: 10px;text-align: center;" id="answer">
+            <h4 id="correct" style="margin-top: 7px; font-size: x-large;"></h4>
+        </div>
+
+        <div style=" height: 30px;text-align: center;">
+            <p id="overless" style="font-size: x-large;"> </p>
+        </div>
+
+
+        <script>
+     window.addEventListener("load",random)
+      
+     var r=0;
+      function random()
+      {
+        r = Math.floor(Math.random() * 100) + 1;
+
+        
+        
+      }
+        var guess=[];
+        var n=0;
+
+        function check()
+        {
+            var n=r;
+            let a=document.getElementById("number").value;
+            
+           
+            try
+            {
+                let v=parseInt(a);
+                if (isNaN(v)) {
+                    window.alert("Not a valid integer");
+             throw new Error("Not a valid integer");
+            }
+            if(guess.length>-1)
+            {
+                document.getElementById("previous").style.display="flex";
+            }
+                
+            if(v==n)
+            {
+                // document.getElementById("answer").style.backgroundColor="green";
+                 document.getElementById("answer").style.display="block";
+                 document.getElementById("correct").innerHTML="Congragulations your guess is correct";
+                 document.getElementById("correct").style.color="green";
+                 document.getElementById("overless").innerHTML='';
+                 
+                 document.getElementById("submit").style.display="none";
+                 
+                
+                 
+                 
+
+            }
+            else
+            {
+                // document.getElementById("answer").style.backgroundColor="red";
+                 document.getElementById("answer").style.display="block";
+                 document.getElementById("correct").innerHTML="Wrong Number";
+                 document.getElementById("correct").style.color="red";
+                 guess.push(v);
+                 document.getElementById("guesses").innerHTML=guess;
+                 
+                
+
+                 
+                 if(n<guess[guess.length-1])
+                 {
+                    document.getElementById("overless").innerHTML='Your guess is high';
+                   
+                 }
+                 else
+                 {
+                    document.getElementById("overless").innerHTML='Your guess is low';
+                 }
+                 document.getElementById("number").value='';
+
+                 if(guess.length==10)
+                 {
+                    window.alert("It is more than 10 times.So game restart");
+                     restart();
+                 }
+
+            }
+        }
+        catch(Error)
+        {
+            Window.alert("It should be a number");
+        }
+
+        }
+
+        function restart()
+        {
+        
+            try
+            {
+            document.getElementById("previous").style.display="none";
+            document.getElementById("answer").style.display="none";
+            document.getElementById("overless").innerHTML='';
+            document.getElementById("number").value='';
+             guess=[]
+            }
+            catch(err)
+            {
+                window.alert(err);
+            }
+
+        }
+
+        </script>
+    </body>
+
+  
+</html>
